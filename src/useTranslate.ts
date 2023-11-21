@@ -3,12 +3,13 @@ import { useState } from 'react';
 const useTranslate = () => {
   const [translation, setTranslation] = useState('');
   const [loading, setLoading] = useState(false);
+  const apiOrigin = process.env.API_ORIGIN;
 
   const detectAndTranslate = async (text: string) => {
     setLoading(true);
     try {
       // 使用原文的第一个字符进行语言检测
-      const detectionResponse = await fetch('http://localhost:3000/api/translate', {
+      const detectionResponse = await fetch(`${apiOrigin}/api/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ const useTranslate = () => {
       console.log(targetLang)
 
       // 使用检测到的源语言进行完整翻译
-      const translationResponse = await fetch('http://localhost:3000/api/translate', {
+      const translationResponse = await fetch(`${apiOrigin}/api/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
