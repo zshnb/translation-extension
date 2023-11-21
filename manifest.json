@@ -10,12 +10,20 @@
     },
     "action": {
         "default_popup": "js/index.html",
-        "default_title": "React Chrome Extension"
+        "default_title": "Useful Translation"
     },
     "content_scripts": [
         {
             "matches": ["https://*/*"],
             "js": ["js/content_script.js"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/logo.png"
+            ],
+            "matches": ["https://*/*"]
         }
     ]
 }
