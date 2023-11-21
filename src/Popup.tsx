@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import 'tailwindcss/tailwind.css';
+import useTranslate from "./useTranslate";
 
 const Container = styled.div`
   padding: 1rem;
@@ -16,12 +17,11 @@ const TranslationResult = styled.div`
 
 const Popup: React.FC = () => {
   const [text, setText] = useState('');
-  const [translation, setTranslation] = useState('');
+  const { translate, translation, loading } = useTranslate(); // 使用hook
 
   const handleTranslate = () => {
-    // 在这里调用翻译API
-    // 暂时使用Mock数据
-    setTranslation('这是翻译结果');
+    // 调用translate函数进行翻译
+    translate(text);
   };
 
   return (
@@ -32,7 +32,9 @@ const Popup: React.FC = () => {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <TranslateButton onClick={handleTranslate}>翻译</TranslateButton>
+      <TranslateButton onClick={handleTranslate} disabled={loading}>
+        {loading ? '翻译中...' : '翻译'}
+      </TranslateButton>
       <TranslationResult>{translation}</TranslationResult>
     </Container>
   );

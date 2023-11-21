@@ -5,5 +5,11 @@
     "action": {
         "default_popup": "js/index.html",
         "default_title": "React Chrome Extension"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*/*"],
+            "js": ["js/content_script.js"]
+        }
+    ]
 }
