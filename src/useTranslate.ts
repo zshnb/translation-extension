@@ -8,41 +8,42 @@ const useTranslate = () => {
     setLoading(true);
     try {
       // 使用原文的第一个字符进行语言检测
-      const detectionResponse = await fetch('https://api.deepl.com/v2/translate', {
+      const detectionResponse = await fetch('http://localhost:3000/api/translate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'DeepL-Auth-Key 52c1db36-46e2-eb9a-8410-d5522624907b:fx'
         },
         body: JSON.stringify({
           'text': text,
-          'target_lang': 'EN' // 仅用于检测源语言
+          'sourceLang': null,
+          'targetLang': 'EN-US' // 仅用于检测源语言
         })
       });
 
       const detectionData = await detectionResponse.json();
-      const detectedSourceLang = detectionData.translations[0].detected_source_language;
+      console.log(detectionData)
+      const detectedSourceLang = detectionData.detectedSourceLang.toUpperCase()
 
       // 根据源语言确定目标语言
-      const targetLang = detectedSourceLang === 'ZH' ? 'EN' : 'ZH';
+      const targetLang = detectedSourceLang === 'ZH' ? 'EN-US' : 'ZH';
+      console.log(targetLang)
 
       // 使用检测到的源语言进行完整翻译
-      const translationResponse = await fetch('https://api.deepl.com/v2/translate', {
+      const translationResponse = await fetch('http://localhost:3000/api/translate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'DeepL-Auth-Key 52c1db36-46e2-eb9a-8410-d5522624907b:fx'
         },
         body: JSON.stringify({
           'text': text,
-          'source_lang': detectedSourceLang,
-          'target_lang': targetLang,
+          'sourceLang': detectedSourceLang,
+          'targetLang': targetLang,
         })
       });
 
       const translationData = await translationResponse.json();
       if (translationResponse.ok) {
-        setTranslation(translationData.translations[0].text);
+        setTranslation(translationData.text);
       } else {
         throw new Error(translationData.message || '翻译失败');
       }
