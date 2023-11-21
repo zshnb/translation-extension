@@ -24,7 +24,7 @@ const TranslationTextWrap = styled.div<Pick<FloatingDivProps, 'position'>>`
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  transform: translateX(50%);
+  transform: translateX(-50%);
 `
 const FloatingDiv: React.FC<FloatingDivProps> = ({ text, onClose, position }) => {
   const { translate, translation, loading } = useTranslate(); // 使用hook

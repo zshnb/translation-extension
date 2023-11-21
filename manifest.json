@@ -1,7 +1,8 @@
 {
     "version": "1.0.0",
     "manifest_version": 3,
-    "name": "Useful Translation",
+    "name": "Quick Translate - 快捷翻译",
+    "description": "快速、便捷的翻译助手。提供即时、准确的多语言翻译,让您通过简单的文本选择，轻松翻译网页内容。",
     "icons": {
         "16": "assets/logo.png",
         "32": "assets/logo.png",

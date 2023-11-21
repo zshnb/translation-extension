@@ -35,7 +35,7 @@ const Popup: React.FC = () => {
 
   return (
     <Container>
-      <StyledTitle>翻译助手</StyledTitle>
+      <StyledTitle>快捷翻译</StyledTitle>
       <StyledTextarea
         value={text}
         onChange={(e) => setText(e.target.value)}
