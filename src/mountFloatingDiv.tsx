@@ -15,6 +15,17 @@ export type FloatingDivProps = {
 const TranslationText = styled.p`
   margin: 0;
 `
+
+const TranslationTextWrap = styled.div<Pick<FloatingDivProps, 'position'>>`
+  position: absolute;
+  left: ${p => p.position.left}px;
+  top: ${p => p.position.bottom}px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: translateX(50%);
+`
 const FloatingDiv: React.FC<FloatingDivProps> = ({ text, onClose, position }) => {
   const { translate, translation, loading } = useTranslate(); // 使用hook
 
@@ -34,17 +45,9 @@ const FloatingDiv: React.FC<FloatingDivProps> = ({ text, onClose, position }) =>
   }, [text, onClose]);
 
   return (
-    <div style={{
-      position: 'absolute',
-      left: position.left,
-      top: position.bottom,
-      backgroundColor: 'white',
-      padding: '10px',
-      borderRadius: '5px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-    }}>
+    <TranslationTextWrap position={position}>
       <TranslationText>{loading ? '翻译中' : translation}</TranslationText>
-    </div>
+    </TranslationTextWrap>
   );
 };
 

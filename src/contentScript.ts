@@ -10,6 +10,7 @@ const handleSelectionChange = () => {
 
     console.log(range)
     // 设置小方块的样式
+    marker.className = 'useful-translation-icon'
     marker.style.position = 'absolute';
     marker.style.left = `${range.right}px`;
     marker.style.top = `${range.bottom}px`;
@@ -34,6 +35,14 @@ const handleSelectionChange = () => {
   }
 }
 
-document.addEventListener('selectionchange', debounce(handleSelectionChange, 300));
+document.addEventListener('mouseup', debounce(handleSelectionChange, 300));
+document.body.addEventListener('click', function () {
+  const markers = document.getElementsByClassName('useful-translation-icon')
+  if (markers.length > 0) {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].remove()
+    }
+  }
+})
 
 export {}
