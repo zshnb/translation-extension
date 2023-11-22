@@ -8,26 +8,24 @@ const useTranslate = () => {
   const detectAndTranslate = async (text: string) => {
     setLoading(true);
     try {
-      // 使用原文的第一个字符进行语言检测
+      // 使用原文检测
       const detectionResponse = await fetch(`${apiOrigin}/api/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          'text': text,
+          'text': text.substring(0, 10),
           'sourceLang': null,
           'targetLang': 'EN-US' // 仅用于检测源语言
         })
       });
 
       const detectionData = await detectionResponse.json();
-      console.log(detectionData)
       const detectedSourceLang = detectionData.detectedSourceLang.toUpperCase()
 
       // 根据源语言确定目标语言
       const targetLang = detectedSourceLang === 'ZH' ? 'EN-US' : 'ZH';
-      console.log(targetLang)
 
       // 使用检测到的源语言进行完整翻译
       const translationResponse = await fetch(`${apiOrigin}/api/translate`, {

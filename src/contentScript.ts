@@ -16,6 +16,7 @@ const handleSelectionChange = (event: MouseEvent) => {
     marker.style.top = `${mouseY}px`;
     marker.style.width = '20px';
     marker.style.height = '20px';
+    marker.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
     const imageUrl = chrome.runtime.getURL('assets/logo.png');
     marker.style.backgroundImage = `url("${imageUrl}")`;
     marker.style.backgroundSize = 'cover'
@@ -36,7 +37,7 @@ const handleSelectionChange = (event: MouseEvent) => {
 }
 
 document.addEventListener('mouseup', debounce(handleSelectionChange, 300));
-document.body.addEventListener('click', function () {
+document.addEventListener('click', function () {
   const markers = document.getElementsByClassName('useful-translation-icon')
   if (markers.length > 0) {
     for (let i = 0; i < markers.length; i++) {
