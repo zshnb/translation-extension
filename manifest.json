@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
     "name": "Quick Translate - 快捷翻译",
     "description": "快速、便捷的翻译助手。提供即时、准确的多语言翻译,让您通过简单的文本选择，轻松翻译网页内容。",
@@ -11,7 +11,7 @@
     },
     "action": {
         "default_popup": "js/index.html",
-        "default_title": "Useful Translation"
+        "default_title": "Quick Translate - 快捷翻译"
     },
     "content_scripts": [
         {

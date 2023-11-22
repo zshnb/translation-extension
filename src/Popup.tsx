@@ -4,23 +4,31 @@ import 'tailwindcss/tailwind.css';
 import useTranslate from "./useTranslate";
 
 const Container = styled.div.attrs({
-  className: 'flex flex-col items-center justify-center p-4 bg-gray-100 min-h-screen gap-y-4'
+  className: 'flex flex-col items-center p-4 bg-gray-100 min-h-screen gap-y-4'
 })``;
 
-const StyledTitle = styled.h3.attrs({
-  className: 'text-3xl font-bold mb-6 text-gray-700'
+const StyledTitle = styled.p.attrs({
+  className: 'text-xl font-bold text-gray-700'
 })``;
 
 const StyledTranslationResult = styled.div.attrs({
-  className: 'border border-gray-300 p-4 w-full rounded-lg shadow-sm bg-white'
-})``;
+  className: 'border border-gray-300 p-2 w-full rounded-lg shadow-sm bg-white'
+})`
+  & {
+    min-height: 5rem;
+  }
+`;
 
 const StyledButton = styled.button.attrs({
-  className: "bg-blue-500 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-300 text-base w-2/4"
-})``;
+  className: "bg-blue-500 hover:bg-blue-700 text-white rounded-lg transition duration-300 text-sm w-2/4"
+})`
+  & {
+    height: 2rem;
+  }
+`;
 
 const StyledTextarea = styled.textarea.attrs({
-  className: "border border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 text-base w-full"
+  className: "border border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 transition duration-300 text-sm w-full"
 })``;
 
 

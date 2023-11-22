@@ -13,6 +13,7 @@ export type FloatingDivProps = {
 }
 
 const TranslationText = styled.p`
+  color: #565656;
   margin: 0;
 `
 
