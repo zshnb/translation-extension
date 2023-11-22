@@ -43,7 +43,12 @@ const Popup: React.FC = () => {
 
   return (
     <Container>
-      <StyledTitle>快捷翻译</StyledTitle>
+      <div className="flex flex-row w-full">
+        <StyledTitle className="flex-grow">快捷翻译</StyledTitle>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => chrome.runtime.openOptionsPage()}>
+          设置
+        </button>
+      </div>
       <StyledTextarea
         value={text}
         onChange={(e) => setText(e.target.value)}

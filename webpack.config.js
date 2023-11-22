@@ -19,12 +19,13 @@ module.exports = (env) => {
     entry: {
       index: "./src/index.tsx",
       content_script: path.join(__dirname, 'src', 'contentScript.ts'),
+      options: path.join(__dirname, 'src', 'options/index.tsx'),
     },
     mode: "production",
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.(ts|tsx)$/,
           use: [
             {
               loader: "ts-loader",
@@ -41,7 +42,11 @@ module.exports = (env) => {
             "css-loader",
             "postcss-loader"
           ]
-
+        },
+        {
+          test: /\.html$/,
+          loader: 'html-loader',
+          exclude: /node_modules/,
         },
       ],
     },
@@ -53,7 +58,17 @@ module.exports = (env) => {
         ],
       }),
       new webpack.DefinePlugin(envKeys),
-      ...getHtmlPlugins(["index"]),
+      new HTMLPlugin({
+        filename: 'index.html',
+        chunks: ['index'],
+        cache: false,
+      }),
+      new HTMLPlugin({
+        template: path.join(__dirname, 'src/options/options.html'),
+        filename: 'options.html',
+        chunks: ['options'],
+        cache: false,
+      }),
     ],
     resolve: {
       extensions: [".tsx", ".ts", ".js"],
@@ -64,14 +79,3 @@ module.exports = (env) => {
     },
   }
 };
-
-function getHtmlPlugins(chunks) {
-  return chunks.map(
-    (chunk) =>
-      new HTMLPlugin({
-        title: "React extension",
-        filename: `${chunk}.html`,
-        chunks: [chunk],
-      })
-  );
-}

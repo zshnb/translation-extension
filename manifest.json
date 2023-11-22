@@ -26,5 +26,9 @@
             ],
             "matches": ["https://*/*"]
         }
+    ],
+    "options_page": "js/options.html",
+    "permissions": [
+        "storage"
     ]
 }

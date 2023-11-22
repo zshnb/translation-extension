@@ -14,8 +14,8 @@ const handleSelectionChange = (event: MouseEvent) => {
     marker.style.position = 'absolute';
     marker.style.left = `${mouseX}px`;
     marker.style.top = `${mouseY}px`;
-    marker.style.width = '20px';
-    marker.style.height = '20px';
+    marker.style.width = '25px';
+    marker.style.height = '25px';
     marker.style.boxShadow = '0 2px 4px rgba(0,0,0,0.2)';
     const imageUrl = chrome.runtime.getURL('assets/logo.png');
     marker.style.backgroundImage = `url("${imageUrl}")`;
