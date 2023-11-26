@@ -42,7 +42,6 @@ const FloatingDiv: React.FC<FloatingDivProps> = ({ text, onClose, position }) =>
   };
 
   useEffect(() => {
-    // 模拟翻译过程
     translate(text)
     document.addEventListener('click', handleClickOutside);
     return () => {
