@@ -52,7 +52,9 @@ const FloatingDiv: React.FC<FloatingDivProps> = ({ text, onClose, position }) =>
 
   return (
     <TranslationTextWrap position={position} className={'useful-translation-floating-div'}>
-      <TranslationText className={'useful-translation-text'}>{loading ? '翻译中' : translation}</TranslationText>
+      <TranslationText className={'useful-translation-text'}>
+        {loading ? '翻译中' : translation.split('\n').map(it => <p>{it}</p>)}
+      </TranslationText>
     </TranslationTextWrap>
   );
 };

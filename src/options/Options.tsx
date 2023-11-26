@@ -3,29 +3,28 @@ import 'tailwindcss/tailwind.css';
 import {Setting} from "../type/types";
 
 const Options = () => {
-  const [settings, setSettings] = useState<Setting>({
+  const [setting, setSetting] = useState<Setting>({
     mode: 'translation',
-    api: 'deepl',
   });
 
   useEffect(() => {
     // 加载已保存的设置
-    chrome.storage.local.get('settings', (result) => {
-      if (result.settings) {
-        setSettings(result.settings);
+    chrome.storage.local.get('setting', (result) => {
+      if (result.setting) {
+        setSetting(result.setting);
       }
     });
   }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    chrome.storage.local.set({ settings }, () => {
+    chrome.storage.local.set({ setting }, () => {
       console.log('Settings saved.');
     });
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setSettings({ ...settings, [event.target.name]: event.target.value });
+    setSetting({ ...setting, [event.target.name]: event.target.value });
   };
 
   return (
@@ -34,31 +33,21 @@ const Options = () => {
         <div>
           <p>模式：</p>
           <label>
-            <input type="radio" name="mode" value="translation" onChange={handleChange} checked={settings.mode === 'translation'} /> 翻译模式
+            <input type="radio" name="mode" value="translation" onChange={handleChange} checked={setting.mode === 'translation'} /> 翻译模式
           </label>
           <label>
-            <input type="radio" name="mode" value="dictionary" onChange={handleChange} checked={settings.mode === 'dictionary'} /> 词典模式
+            <input type="radio" name="mode" value="dictionary" onChange={handleChange} checked={setting.mode === 'dictionary'} /> 词典模式
           </label>
         </div>
 
         <div>
-          <p>翻译接口：</p>
-          <label>
-            <input type="radio" name="api" value="deepl" onChange={handleChange} checked={settings.api === 'deepl'} /> DeepL
-          </label>
-          <label>
-            <input type="radio" name="api" value="gpt" onChange={handleChange} checked={settings.api === 'gpt'} /> GPT
-          </label>
-        </div>
-
-        <div>
-          <p>API Key：</p>
-          <input type="text" name="apiKey" onChange={handleChange} value={settings.apiKey} className="border border-gray-300 p-2 rounded" />
+          <p>Deepl API Key：</p>
+          <input type="text" name="apiKey" onChange={handleChange} value={setting.apiKey} className="border border-gray-300 p-2 rounded" />
         </div>
 
         <div>
           <p>偏好领域：</p>
-          <select name="preference" onChange={handleChange} value={settings.preference} className="border border-gray-300 p-2 rounded">
+          <select name="preference" onChange={handleChange} value={setting.preference} className="border border-gray-300 p-2 rounded">
             <option value="general">通用</option>
           </select>
         </div>

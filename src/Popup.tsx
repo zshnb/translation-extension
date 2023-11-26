@@ -59,7 +59,11 @@ const Popup: React.FC = () => {
       >
         {loading ? '翻译中...' : '翻译'}
       </StyledButton>
-      <StyledTranslationResult>{translation}</StyledTranslationResult>
+      <StyledTranslationResult>
+        {
+          translation.split('\n').map(it => <p>{it}</p>)
+        }
+      </StyledTranslationResult>
     </Container>
   );
 };
