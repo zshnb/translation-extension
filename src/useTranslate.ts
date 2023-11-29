@@ -95,6 +95,10 @@ const translationMode = async (request: TranslateRequest) => {
     })
   });
 
+  if (!detectionResponse.ok) {
+    throw new Error('翻译失败，请稍后重试')
+  }
+
   const detectionData = await detectionResponse.json();
   const detectedSourceLang = detectionData.detectedSourceLang.toUpperCase()
 
@@ -140,7 +144,7 @@ const dictionaryMode = async (request: TranslateRequest) => {
     const translationData = await translationResponse.json();
     request.onSuccess(translationData)
   } else {
-    throw new Error('翻译失败');
+    throw new Error('翻译失败，请稍后重试');
   }
 }
 
